@@ -6,7 +6,19 @@ export interface Product {
     rating: number
     image: string
     description?: string
+    images?: string[]
+    sizes?: number[]
+    specifications?: {
+        material?: string
+        color?: string
+        weight?: string
+        sole?: string
+        style?: string
+    }
+    inStock?: boolean
+    detailedDescription?: string
 }
+
 
 export const allProducts: Product[] = [
     // Men's Products
@@ -17,7 +29,18 @@ export const allProducts: Product[] = [
         price: 129,
         rating: 5,
         image: "/images/men/men1.png",
-        description: "Timeless white sneakers perfect for any casual outfit"
+        description: "Timeless white sneakers perfect for any casual outfit",
+        images: ["/images/men/men1.png", "/images/men/men1.png", "/images/men/men1.png"],
+        sizes: [7, 8, 9, 10, 11, 12],
+        specifications: {
+            material: "Premium Leather & Canvas",
+            color: "Classic White",
+            weight: "350g per shoe",
+            sole: "Rubber with Air Cushioning",
+            style: "Casual Sneakers"
+        },
+        inStock: true,
+        detailedDescription: "Step into timeless style with our Classic White Sneakers. Crafted from premium leather and canvas, these versatile sneakers feature a clean, minimalist design that pairs perfectly with any casual outfit. The rubber sole with air cushioning provides all-day comfort, while the classic white colorway ensures these shoes will never go out of style."
     },
     {
         id: 2,
@@ -26,7 +49,18 @@ export const allProducts: Product[] = [
         price: 199,
         rating: 5,
         image: "/images/men/men2.png",
-        description: "Handcrafted leather boots for the modern gentleman"
+        description: "Handcrafted leather boots for the modern gentleman",
+        images: ["/images/men/men2.png", "/images/men/men2.png", "/images/men/men2.png"],
+        sizes: [7, 8, 9, 10, 11, 12],
+        specifications: {
+            material: "Full-Grain Leather",
+            color: "Rich Brown",
+            weight: "580g per boot",
+            sole: "Durable Rubber Outsole",
+            style: "Chelsea Boots"
+        },
+        inStock: true,
+        detailedDescription: "Elevate your style with our Premium Leather Boots. Handcrafted from full-grain leather, these boots feature a sophisticated design that's perfect for the modern gentleman. The durable rubber outsole provides excellent traction, while the rich brown color adds a touch of elegance to any outfit."
     },
     {
         id: 5,
@@ -35,7 +69,18 @@ export const allProducts: Product[] = [
         price: 119,
         rating: 5,
         image: "/images/men/men3.png",
-        description: "Street-style sneakers with superior comfort"
+        description: "Street-style sneakers with superior comfort",
+        images: ["/images/men/men3.png", "/images/men/men3.png", "/images/men/men3.png"],
+        sizes: [7, 8, 9, 10, 11, 12],
+        specifications: {
+            material: "Mesh & Synthetic Leather",
+            color: "Black & White",
+            weight: "320g per shoe",
+            sole: "EVA Foam Cushioning",
+            style: "Urban Streetwear"
+        },
+        inStock: true,
+        detailedDescription: "Make a statement with our Urban Street Sneakers. Designed for the modern urbanite, these sneakers combine street-style aesthetics with superior comfort. The breathable mesh upper keeps your feet cool, while the EVA foam cushioning provides exceptional support for all-day wear."
     },
     {
         id: 6,

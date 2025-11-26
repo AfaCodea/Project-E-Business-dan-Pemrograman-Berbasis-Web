@@ -49,7 +49,7 @@ export default function ClientReviews() {
       <div className="container mx-auto px-4">
         <div className="text-right mb-12">
           <div className="inline-block mb-4">
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+            <span className="text-sm font-semibold text-orange uppercase tracking-wider">
               TESTIMONIALS
             </span>
           </div>

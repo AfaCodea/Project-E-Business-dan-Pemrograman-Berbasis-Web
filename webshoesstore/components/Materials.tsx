@@ -17,7 +17,7 @@ export default function Materials() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="inline-block">
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+              <span className="text-sm font-semibold text-orange uppercase tracking-wider">
                 MATERIALS
               </span>
             </div>
@@ -27,7 +27,7 @@ export default function Materials() {
             <p className="text-gray-600 leading-relaxed text-lg">
               Shoes Store X Afa takes pride in using only the finest materials in our footwear. From genuine leather to advanced synthetic fabrics, breathable mesh to durable rubber soles, every component is carefully selected for its quality and performance. We believe that exceptional materials are the foundation of great shoes, which is why we never compromise on quality while maintaining competitive pricing for our valued customers.
             </p>
-            <Button variant="link" className="p-0 text-primary hover:text-primary/80">
+            <Button variant="link" className="p-0 text-orange hover:text-orange/80">
               More Info <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>

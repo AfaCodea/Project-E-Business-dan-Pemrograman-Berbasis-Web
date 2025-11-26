@@ -36,10 +36,10 @@ export default function Header() {
                 href="/shoes"
                 className="flex items-center gap-1.5 cursor-pointer group"
               >
-                <span className="text-sm font-normal tracking-wide hover:text-primary transition-colors duration-200">
+                <span className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200">
                   Shoes
                 </span>
-                <ChevronDown className={`h-3.5 w-3.5 group-hover:text-primary transition-all duration-200 ${isShoesDropdownOpen ? 'rotate-180' : ''
+                <ChevronDown className={`h-3.5 w-3.5 group-hover:text-orange transition-all duration-200 ${isShoesDropdownOpen ? 'rotate-180' : ''
                   }`} />
               </Link>
 
@@ -56,26 +56,26 @@ export default function Header() {
                     <div className="border-t border-gray-100 my-1"></div>
                     <Link
                       href="/shop?category=Men"
-                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
+                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange/5 hover:text-orange transition-colors"
                     >
                       Men
                     </Link>
                     <Link
                       href="/shop?category=Women"
-                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
+                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange/5 hover:text-orange transition-colors"
                     >
                       Women
                     </Link>
                     <Link
                       href="/shop?category=Sports"
-                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
+                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange/5 hover:text-orange transition-colors"
                     >
                       Sports
                     </Link>
                     <div className="border-t border-gray-100 my-1"></div>
                     <Link
                       href="/shop"
-                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors"
+                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange/5 hover:text-orange transition-colors"
                     >
                       View All Products
                     </Link>
@@ -86,19 +86,19 @@ export default function Header() {
 
             <Link
               href="/shop"
-              className="text-sm font-normal tracking-wide hover:text-primary transition-colors duration-200"
+              className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200"
             >
               Shop
             </Link>
             <Link
               href="/about"
-              className="text-sm font-normal tracking-wide hover:text-primary transition-colors duration-200"
+              className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200"
             >
               About Us
             </Link>
             <Link
               href="/contact"
-              className="text-sm font-normal tracking-wide hover:text-primary transition-colors duration-200"
+              className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200"
             >
               Contact
             </Link>
@@ -110,11 +110,11 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative text-white hover:text-primary hover:bg-white/10 h-10 w-10 rounded-full transition-all duration-200"
+                className="relative text-white hover:text-orange hover:bg-white/10 h-10 w-10 rounded-full transition-all duration-200"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-white text-xs font-medium flex items-center justify-center shadow-lg">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-orange text-white text-xs font-medium flex items-center justify-center shadow-lg">
                     {totalItems}
                   </span>
                 )}

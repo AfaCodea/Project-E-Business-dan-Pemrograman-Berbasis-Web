@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react"
 import { Product } from "./products"
+import { useToast } from "./toast-context"
 
 export interface CartItem extends Product {
     quantity: number
@@ -24,6 +25,7 @@ const CART_STORAGE_KEY = "shoes-store-cart"
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([])
     const [isInitialized, setIsInitialized] = useState(false)
+    const { showToast } = useToast()
 
     // Load cart from localStorage on mount
     useEffect(() => {
@@ -55,6 +57,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
             if (existingItem) {
                 // Increase quantity if item already exists
+                showToast(`${product.name} quantity updated`, 'success')
                 return currentItems.map((item) =>
                     item.id === product.id
                         ? { ...item, quantity: item.quantity + 1 }
@@ -62,12 +65,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 )
             } else {
                 // Add new item with quantity 1
+                showToast(`${product.name} added to cart`, 'success')
                 return [...currentItems, { ...product, quantity: 1 }]
             }
         })
     }
 
     const removeFromCart = (productId: number) => {
+        const item = items.find((item) => item.id === productId)
+        if (item) {
+            showToast(`${item.name} removed from cart`, 'info')
+        }
         setItems((currentItems) => currentItems.filter((item) => item.id !== productId))
     }
 
@@ -85,6 +93,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
 
     const clearCart = () => {
+        if (items.length > 0) {
+            showToast('Cart cleared', 'warning')
+        }
         setItems([])
     }
 

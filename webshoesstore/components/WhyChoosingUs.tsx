@@ -29,7 +29,7 @@ export default function WhyChoosingUs() {
               Why Choosing Us
             </h2>
           </div>
-          
+
           {/* Right Column - Three Cards Horizontal */}
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {features.map((feature, index) => (
@@ -40,7 +40,7 @@ export default function WhyChoosingUs() {
                 <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
-                <Button variant="link" className="p-0 h-auto text-primary hover:text-primary/80 text-sm lg:text-base font-medium">
+                <Button variant="link" className="p-0 h-auto text-orange hover:text-orange/80 text-sm lg:text-base font-medium">
                   More Info <ArrowRight className="ml-1.5 h-3.5 w-3.5 lg:h-4 lg:w-4 inline" />
                 </Button>
               </div>

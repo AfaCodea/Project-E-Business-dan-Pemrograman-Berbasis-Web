@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { Button } from "@/components/ui/button"
@@ -76,8 +77,8 @@ export default function ShopContent() {
                 variant={selectedCategory === category ? "default" : "outline"}
                 onClick={() => setSelectedCategory(category)}
                 className={`rounded-full px-6 ${selectedCategory === category
-                    ? "bg-gray-800 text-white hover:bg-gray-700"
-                    : "bg-white text-gray-700 hover:bg-gray-100"
+                  ? "bg-gray-800 text-white hover:bg-gray-700"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
                   }`}
               >
                 {category}
@@ -116,17 +117,21 @@ export default function ShopContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
                 <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="relative h-64 w-full">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
+                  <Link href={`/product/${product.id}`}>
+                    <div className="relative h-64 w-full cursor-pointer">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </Link>
                   <CardContent className="p-4">
                     <p className="text-sm text-gray-500 mb-1">{product.category}</p>
-                    <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+                    <Link href={`/product/${product.id}`}>
+                      <h3 className="font-semibold text-lg mb-2 hover:text-primary transition-colors cursor-pointer">{product.name}</h3>
+                    </Link>
                     <div className="flex items-center gap-1 mb-2">
                       {[...Array(product.rating)].map((_, i) => (
                         <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
