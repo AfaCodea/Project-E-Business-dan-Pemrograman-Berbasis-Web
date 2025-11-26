@@ -1,4 +1,4 @@
-# Panto - Modern Furniture Store
+# Shoes Store - Modern Furniture Store
 
 Website furniture modern dengan desain minimalis menggunakan Next.js, TypeScript, dan shadcn/ui.
 
