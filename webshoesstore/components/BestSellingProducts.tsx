@@ -1,50 +1,26 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, Star, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import Link from "next/link"
+import { Plus, Star, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
+import { useCart } from "@/lib/cart-context"
+import { allProducts } from "@/lib/products"
 
 const categories = ["All", "Men", "Women", "Sports"]
 
-const products = [
-  {
-    id: 1,
-    name: "Classic White Sneakers",
-    category: "Men",
-    price: 129,
-    rating: 5,
-    image: "/images/men/men1.png",
-  },
-  {
-    id: 2,
-    name: "Premium Leather Boots",
-    category: "Men",
-    price: 199,
-    rating: 5,
-    image: "/images/men/men2.png",
-  },
-  {
-    id: 3,
-    name: "Fashionable Women Shoes",
-    category: "Women",
-    price: 89,
-    rating: 5,
-    image: "/images/women/women1.png",
-  },
-  {
-    id: 4,
-    name: "Running Sport Shoes",
-    category: "Sports",
-    price: 149,
-    rating: 5,
-    image: "/images/sports/sports1.png",
-  },
-]
+// Get first 4 products for homepage display
+const products = allProducts.slice(0, 4)
 
 export default function BestSellingProducts() {
   const [activeCategory, setActiveCategory] = useState("All")
+  const { addToCart } = useCart()
+
+  const handleAddToCart = (product: typeof products[0]) => {
+    addToCart(product)
+  }
 
   return (
     <section className="py-20 bg-gray-50">
@@ -59,11 +35,10 @@ export default function BestSellingProducts() {
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
               onClick={() => setActiveCategory(category)}
-              className={`rounded-full px-6 ${
-                activeCategory === category
+              className={`rounded-full px-6 ${activeCategory === category
                   ? "bg-gray-800 text-white hover:bg-gray-700"
                   : "bg-white text-gray-700 hover:bg-gray-100"
-              }`}
+                }`}
             >
               {category}
             </Button>
@@ -72,8 +47,8 @@ export default function BestSellingProducts() {
 
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {(activeCategory === "All" 
-              ? products 
+            {(activeCategory === "All"
+              ? products
               : products.filter(p => p.category === activeCategory)
             ).map((product) => (
               <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -98,6 +73,7 @@ export default function BestSellingProducts() {
                     <Button
                       size="icon"
                       className="h-10 w-10 rounded-full bg-blue-900 hover:bg-blue-800"
+                      onClick={() => handleAddToCart(product)}
                     >
                       <Plus className="h-5 w-5" />
                     </Button>
@@ -109,12 +85,15 @@ export default function BestSellingProducts() {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="link" className="text-primary">
-            View All <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/shop">
+            <Button variant="link" className="text-primary">
+              View All <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
   )
 }
+
 
