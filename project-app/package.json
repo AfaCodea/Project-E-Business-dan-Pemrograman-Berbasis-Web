@@ -1,0 +1,50 @@
+{
+  "name": "ecommerce-fashion-store",
+  "version": "1.0.0",
+  "description": "E-commerce website untuk baju dengan React.js",
+  "private": true,
+  "dependencies": {
+    "@stripe/stripe-js": "^2.1.11",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "5.0.1",
+    "axios": "^1.3.4",
+    "styled-components": "^5.3.9",
+    "react-icons": "^4.7.1",
+    "react-query": "^3.39.3",
+    "react-hook-form": "^7.43.5",
+    "react-hot-toast": "^2.4.0",
+    "framer-motion": "^10.0.1",
+    "swiper": "^9.0.2",
+    "react-intersection-observer": "^9.4.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
+  }
+}
