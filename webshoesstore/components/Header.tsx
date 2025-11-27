@@ -19,7 +19,7 @@ export default function Header() {
           <div className="flex items-center flex-shrink-0">
             <Link href="/" className="px-5 py-2.5">
               <h1 className="text-base sm:text-lg lg:text-xl font-semibold text-white tracking-tight whitespace-nowrap">
-                Shoes Store <span className="text-primary font-bold">X</span> Afa
+                Shoes Store <span className="text-orange font-bold">X</span> Afa
               </h1>
             </Link>
           </div>

@@ -27,7 +27,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
 
         // Add to cart multiple times based on quantity
         for (let i = 0; i < quantity; i++) {
-            addToCart(product);
+            addToCart(product, selectedSize || undefined);
         }
     };
 

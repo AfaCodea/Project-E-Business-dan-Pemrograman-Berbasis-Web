@@ -1,6 +1,5 @@
 "use client"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
@@ -12,7 +11,47 @@ const heroImage = "/images/hero-section.jpg"
 
 export default function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("")
+  const [displayText, setDisplayText] = useState("")
+  const fullText = "Step Into Style & Comfort"
   const router = useRouter()
+
+  useEffect(() => {
+    let currentIndex = 0
+    let isDeleting = false
+    let timeoutId: NodeJS.Timeout
+
+    const type = () => {
+      const currentFullText = fullText
+
+      if (isDeleting) {
+        setDisplayText(currentFullText.substring(0, currentIndex - 1))
+        currentIndex--
+      } else {
+        setDisplayText(currentFullText.substring(0, currentIndex + 1))
+        currentIndex++
+      }
+
+      let typeSpeed = 100
+
+      if (isDeleting) {
+        typeSpeed /= 2 // Deleting is faster
+      }
+
+      if (!isDeleting && currentIndex === currentFullText.length) {
+        typeSpeed = 2000 // Pause at end
+        isDeleting = true
+      } else if (isDeleting && currentIndex === 0) {
+        isDeleting = false
+        typeSpeed = 500 // Pause before typing again
+      }
+
+      timeoutId = setTimeout(type, typeSpeed)
+    }
+
+    timeoutId = setTimeout(type, 1000) // Initial delay
+
+    return () => clearTimeout(timeoutId)
+  }, [])
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -39,11 +78,12 @@ export default function HeroSection() {
 
         {/* Content */}
         <div className="relative z-10 px-6 sm:px-8 lg:px-16 py-20 lg:py-32 max-w-2xl w-full">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight">
-            Step Into Style & Comfort
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight min-h-[1.2em]">
+            {displayText}
+            <span className="animate-pulse text-orange">|</span>
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-10 leading-relaxed">
-            Discover premium quality footwear at Shoes Store X Afa. We offer an extensive collection of stylish and comfortable shoes crafted with excellence. Find your perfect pair that combines elegance, durability, and unmatched comfort.
+            Discover premium quality footwear at Shoes Store <span className="text-orange font-bold">X</span> Afa. We offer an extensive collection of stylish and comfortable shoes crafted with excellence. Find your perfect pair that combines elegance, durability, and unmatched comfort.
           </p>
 
           {/* Search Bar */}

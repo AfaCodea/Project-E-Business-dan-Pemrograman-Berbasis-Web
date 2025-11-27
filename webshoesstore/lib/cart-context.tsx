@@ -5,12 +5,13 @@ import { Product } from "./products"
 import { useToast } from "./toast-context"
 
 export interface CartItem extends Product {
+    selectedSize: any
     quantity: number
 }
 
 interface CartContextType {
     items: CartItem[]
-    addToCart: (product: Product) => void
+    addToCart: (product: Product, size?: number) => void
     removeFromCart: (productId: number) => void
     updateQuantity: (productId: number, quantity: number) => void
     clearCart: () => void
@@ -51,22 +52,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
     }, [items, isInitialized])
 
-    const addToCart = (product: Product) => {
+    const addToCart = (product: Product, size?: number) => {
         setItems((currentItems) => {
-            const existingItem = currentItems.find((item) => item.id === product.id)
+            const existingItem = currentItems.find((item) =>
+                item.id === product.id && item.selectedSize === (size || item.selectedSize)
+            )
 
             if (existingItem) {
                 // Increase quantity if item already exists
                 showToast(`${product.name} quantity updated`, 'success')
                 return currentItems.map((item) =>
-                    item.id === product.id
+                    item.id === product.id && item.selectedSize === (size || item.selectedSize)
                         ? { ...item, quantity: item.quantity + 1 }
                         : item
                 )
             } else {
                 // Add new item with quantity 1
                 showToast(`${product.name} added to cart`, 'success')
-                return [...currentItems, { ...product, quantity: 1 }]
+                return [...currentItems, {
+                    ...product,
+                    quantity: 1,
+                    selectedSize: size || (product.sizes && product.sizes.length > 0 ? product.sizes[0] : null)
+                }]
             }
         })
     }
