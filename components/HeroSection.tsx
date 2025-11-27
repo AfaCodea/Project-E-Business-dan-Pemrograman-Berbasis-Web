@@ -14,12 +14,12 @@ const Hotspot = ({ className, delay, label, isActive, onHover }: { className: st
   <motion.div
     initial={{ opacity: 0, scale: 0 }}
     animate={{ opacity: 1, scale: 1 }}
-    transition={{ delay, duration: 0.5 }}
-    className={`absolute ${className} group z-20`}
+    transition={{ delay, duration: 0.3 }}
+    className={`absolute ${className} group z-20 hidden sm:flex`}
     onMouseEnter={() => onHover(true)}
     onMouseLeave={() => onHover(false)}
   >
-    <div className="relative flex items-center justify-center w-12 h-12 cursor-pointer">
+    <div className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 cursor-pointer">
       {/* Pulsing Ring */}
       <motion.div
         animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
@@ -28,13 +28,13 @@ const Hotspot = ({ className, delay, label, isActive, onHover }: { className: st
       />
 
       {/* Main Circle */}
-      <div className={`relative w-12 h-12 rounded-full border-2 border-white/90 backdrop-blur-md flex items-center justify-center transition-all shadow-lg ring-2 ring-white/30 ${isActive ? 'bg-white/30 scale-110' : 'bg-white/20 hover:bg-white/30 hover:scale-110'}`}>
-        <div className="w-3 h-3 rounded-full bg-white shadow-sm"></div>
+      <div className={`relative w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white/90 backdrop-blur-md flex items-center justify-center transition-all shadow-lg ring-2 ring-white/30 ${isActive ? 'bg-white/30 scale-110' : 'bg-white/20 hover:bg-white/30 hover:scale-110'}`}>
+        <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white shadow-sm"></div>
       </div>
 
       {/* Tooltip */}
-      <div className={`absolute left-full ml-4 px-4 py-2 bg-white/90 backdrop-blur-md rounded-lg shadow-xl transition-all duration-300 pointer-events-none whitespace-nowrap ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`}>
-        <p className="text-sm font-semibold text-gray-900">{label}</p>
+      <div className={`absolute left-full ml-3 md:ml-4 px-3 md:px-4 py-1.5 md:py-2 bg-white/90 backdrop-blur-md rounded-lg shadow-xl transition-all duration-300 pointer-events-none whitespace-nowrap ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`}>
+        <p className="text-xs md:text-sm font-semibold text-gray-900">{label}</p>
         <div className="absolute left-0 top-1/2 -translate-x-1 -translate-y-1/2 w-2 h-2 bg-white/90 rotate-45"></div>
       </div>
     </div>
@@ -49,12 +49,14 @@ export default function HeroSection() {
   const containerRef = useRef(null)
   const [activeHotspot, setActiveHotspot] = useState(0)
   const [isHoveringHotspot, setIsHoveringHotspot] = useState(false)
+  const [animationComplete, setAnimationComplete] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   })
 
+  // Only apply parallax after initial animation completes
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"], { ease: easeOut })
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1], { ease: easeOut })
 
@@ -131,57 +133,67 @@ export default function HeroSection() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 px-6 sm:px-8 lg:px-16 py-20 lg:py-32 max-w-2xl w-full">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight min-h-[1.2em]">
+        <div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 max-w-2xl w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight min-h-[1.2em]">
             {displayText}
             <span className="animate-pulse text-orange">|</span>
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-10 leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 md:mb-10 leading-relaxed">
             Discover premium quality footwear at Shoes Store <span className="text-orange font-bold">X</span> Afa. We offer an extensive collection of stylish and comfortable shoes crafted with excellence. Find your perfect pair that combines elegance, durability, and unmatched comfort.
           </p>
 
           {/* Search Bar */}
-          <div className="relative">
+          <div className="relative max-w-xl">
             <Input
               type="text"
               placeholder="Search shoes"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={handleKeyPress}
-              className="w-full h-12 sm:h-14 lg:h-16 pl-5 sm:pl-6 pr-14 sm:pr-16 bg-gray-800/95 border border-gray-700/50 text-white placeholder:text-gray-400 rounded-full text-sm sm:text-base lg:text-lg backdrop-blur-sm focus:border-primary/50"
+              className="w-full h-11 sm:h-12 md:h-14 lg:h-16 pl-4 sm:pl-5 md:pl-6 pr-12 sm:pr-14 md:pr-16 bg-gray-800/95 border border-gray-700/50 text-white placeholder:text-gray-400 rounded-full text-sm sm:text-base lg:text-lg backdrop-blur-sm focus:border-primary/50 transition-all"
             />
             <Button
               size="icon"
               onClick={handleSearch}
-              className="absolute right-1 sm:right-2 top-1 sm:top-2 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-orange hover:bg-orange/90 shadow-lg"
+              aria-label="Search"
+              className="absolute right-1 sm:right-1.5 md:right-2 top-1 sm:top-1.5 md:top-2 h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full bg-orange hover:bg-orange/90 shadow-lg transition-all"
             >
-              <Search className="h-5 w-5 sm:h-6 sm:w-6" />
+              <Search className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
             </Button>
           </div>
         </div>
       </div>
 
       {/* Right Side - Shoes Display Image */}
-      <div className="relative w-full lg:w-1/2 bg-white order-first lg:order-last overflow-hidden">
+      <div className="relative w-full lg:w-1/2 bg-white order-first lg:order-last overflow-hidden min-h-[50vh] sm:min-h-[60vh] lg:min-h-screen">
         <motion.div
-          className="relative h-full min-h-[400px] sm:min-h-[500px] lg:min-h-screen"
-          initial={{ clipPath: "inset(10% 10% 10% 10%)", scale: 1.2 }}
-          animate={{ clipPath: "inset(0% 0% 0% 0%)", scale: 1 }}
-          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative h-full w-full"
+          initial={{ clipPath: "inset(4% 4% 4% 4%)" }}
+          animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+          transition={{
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}
+          onAnimationComplete={() => setAnimationComplete(true)}
           style={{
-            y,
-            scale,
+            y: animationComplete ? y : 0,
+            scale: animationComplete ? scale : 1,
             willChange: "transform",
             backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden"
+            WebkitBackfaceVisibility: "hidden",
+            transform: "translateZ(0)"
           }}
         >
           <Image
             src={heroImage}
-            alt="Premium shoes collection"
+            alt="Premium shoes collection - Premium quality footwear at Shoes Store X Afa"
             fill
-            className="object-cover"
+            className="object-cover object-center"
             priority
+            quality={85}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
           />
 
           {/* Gradient Overlay for smooth transition to next section */}
@@ -190,35 +202,35 @@ export default function HeroSection() {
           {/* Hotspot Indicators - White circles with glow */}
           <Hotspot
             className="top-[25%] left-[20%]"
-            delay={1}
+            delay={0.3}
             label="Premium Leather"
             isActive={activeHotspot === 0}
             onHover={setIsHoveringHotspot}
           />
           <Hotspot
             className="bottom-[30%] right-[25%]"
-            delay={1.2}
+            delay={0.4}
             label="Air Cushion Sole"
             isActive={activeHotspot === 1}
             onHover={setIsHoveringHotspot}
           />
           <Hotspot
             className="top-[45%] right-[35%]"
-            delay={1.4}
+            delay={0.5}
             label="Breathable Lining"
             isActive={activeHotspot === 2}
             onHover={setIsHoveringHotspot}
           />
           <Hotspot
             className="bottom-[25%] left-[40%]"
-            delay={1.6}
+            delay={0.6}
             label="Anti-slip Grip"
             isActive={activeHotspot === 3}
             onHover={setIsHoveringHotspot}
           />
           <Hotspot
             className="top-[60%] left-[55%]"
-            delay={1.8}
+            delay={0.7}
             label="Memory Foam Insole"
             isActive={activeHotspot === 4}
             onHover={setIsHoveringHotspot}
