@@ -2,30 +2,38 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ShoppingCart, ChevronDown } from "lucide-react"
+import { ShoppingBag, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/lib/cart-context"
 import { CartSheet } from "@/components/CartSheet"
 
-export default function Header() {
+interface HeaderProps {
+  variant?: "default" | "dark"
+}
+
+export default function Header({ variant = "default" }: HeaderProps) {
   const [isShoesDropdownOpen, setIsShoesDropdownOpen] = useState(false)
   const { totalItems } = useCart()
 
+  const isDark = variant === "dark"
+  const textColor = isDark ? "text-gray-900" : "text-white"
+  const hoverColor = "hover:text-orange"
+
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 w-full">
+    <header className={`absolute top-0 left-0 right-0 z-50 w-full ${isDark ? 'bg-white/80 backdrop-blur-md border-b border-gray-100' : ''}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link href="/" className="px-5 py-2.5">
-              <h1 className="text-base sm:text-lg lg:text-xl font-semibold text-white tracking-tight whitespace-nowrap">
+              <h1 className={`text-base sm:text-lg lg:text-xl font-semibold ${textColor} tracking-tight whitespace-nowrap`}>
                 Shoes Store <span className="text-orange font-bold">X</span> Afa
               </h1>
             </Link>
           </div>
 
           {/* Navigation - Absolutely Centered */}
-          <nav className="hidden lg:flex items-center gap-8 text-white absolute left-1/2 -translate-x-1/2">
+          <nav className={`hidden lg:flex items-center gap-8 ${textColor} absolute left-1/2 -translate-x-1/2`}>
             {/* Shoes Dropdown */}
             <div
               className="relative"
@@ -36,7 +44,7 @@ export default function Header() {
                 href="/shoes"
                 className="flex items-center gap-1.5 cursor-pointer group"
               >
-                <span className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200">
+                <span className={`text-sm font-normal tracking-wide ${hoverColor} transition-colors duration-200`}>
                   Shoes
                 </span>
                 <ChevronDown className={`h-3.5 w-3.5 group-hover:text-orange transition-all duration-200 ${isShoesDropdownOpen ? 'rotate-180' : ''
@@ -86,19 +94,19 @@ export default function Header() {
 
             <Link
               href="/shop"
-              className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200"
+              className={`text-sm font-normal tracking-wide ${hoverColor} transition-colors duration-200`}
             >
               Shop
             </Link>
             <Link
               href="/about"
-              className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200"
+              className={`text-sm font-normal tracking-wide ${hoverColor} transition-colors duration-200`}
             >
               About Us
             </Link>
             <Link
               href="/contact"
-              className="text-sm font-normal tracking-wide hover:text-orange transition-colors duration-200"
+              className={`text-sm font-normal tracking-wide ${hoverColor} transition-colors duration-200`}
             >
               Contact
             </Link>
@@ -110,9 +118,9 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative text-white hover:text-orange hover:bg-white/10 h-10 w-10 rounded-full transition-all duration-200"
+                className={`relative ${textColor} hover:text-orange hover:bg-black/5 h-10 w-10 rounded-full transition-all duration-200`}
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingBag className="h-5 w-5" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-orange text-white text-xs font-medium flex items-center justify-center shadow-lg">
                     {totalItems}

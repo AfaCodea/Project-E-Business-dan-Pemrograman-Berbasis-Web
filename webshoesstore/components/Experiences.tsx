@@ -4,21 +4,23 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
+import { FadeIn } from "@/components/ui/motion"
+
 export default function Experiences() {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[500px] rounded-lg overflow-hidden">
+          <FadeIn direction="right" delay={0.2} className="relative h-[500px] rounded-lg overflow-hidden">
             <Image
               src="/images/about.png"
               alt="Premium shoes collection"
               fill
               className="object-cover rounded-lg"
             />
-          </div>
+          </FadeIn>
 
-          <div className="space-y-6">
+          <FadeIn direction="left" delay={0.4} className="space-y-6">
             <div className="inline-block">
               <span className="text-sm font-semibold text-orange uppercase tracking-wider">
                 EXPERIENCES
@@ -33,7 +35,7 @@ export default function Experiences() {
             <Button variant="link" className="p-0 text-orange hover:text-orange/80">
               More Info <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </section>

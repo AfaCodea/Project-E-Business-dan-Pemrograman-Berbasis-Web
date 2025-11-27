@@ -18,6 +18,11 @@ const features = [
   },
 ]
 
+import { FadeIn, StaggerContainer, fadeInItem } from "@/components/ui/motion"
+import { motion } from "framer-motion"
+
+// ... imports ...
+
 export default function WhyChoosingUs() {
   return (
     <section className="py-20 bg-white">
@@ -25,15 +30,17 @@ export default function WhyChoosingUs() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Column - Heading */}
           <div className="lg:sticky lg:top-24">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Why Choosing Us
-            </h2>
+            <FadeIn direction="right" delay={0.2}>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Why Choosing Us
+              </h2>
+            </FadeIn>
           </div>
 
           {/* Right Column - Three Cards Horizontal */}
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <StaggerContainer className="grid md:grid-cols-3 gap-6 lg:gap-8" staggerChildren={0.2}>
             {features.map((feature, index) => (
-              <div key={index} className="space-y-3 lg:space-y-4">
+              <motion.div key={index} variants={fadeInItem} className="space-y-3 lg:space-y-4">
                 <h3 className="text-base lg:text-lg xl:text-xl font-bold text-gray-900 leading-tight">
                   {feature.title}
                 </h3>
@@ -43,9 +50,9 @@ export default function WhyChoosingUs() {
                 <Button variant="link" className="p-0 h-auto text-orange hover:text-orange/80 text-sm lg:text-base font-medium">
                   More Info <ArrowRight className="ml-1.5 h-3.5 w-3.5 lg:h-4 lg:w-4 inline" />
                 </Button>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </div>
     </section>

@@ -35,7 +35,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
     return (
         <>
-            <Header />
+            <Header variant="dark" />
             <main className="product-page">
                 <ProductDetail product={product} />
             </main>

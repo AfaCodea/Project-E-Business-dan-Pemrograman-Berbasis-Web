@@ -155,8 +155,9 @@
 
 /* Toast Variants */
 .toast-success {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.95) 100%);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #10b981;
+  border-left: 4px solid #059669;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .toast-success .toast-message,
@@ -173,8 +174,9 @@
 }
 
 .toast-error {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #ef4444;
+  border-left: 4px solid #dc2626;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .toast-error .toast-message,
@@ -191,8 +193,9 @@
 }
 
 .toast-warning {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.95) 0%, rgba(217, 119, 6, 0.95) 100%);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #f59e0b;
+  border-left: 4px solid #d97706;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .toast-warning .toast-message,
@@ -209,8 +212,9 @@
 }
 
 .toast-info {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #3b82f6;
+  border-left: 4px solid #2563eb;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .toast-info .toast-message,

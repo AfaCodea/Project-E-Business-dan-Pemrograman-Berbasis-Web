@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react"
 import { Product } from "./products"
-import { useToast } from "./toast-context"
+import { toast } from "@/hooks/use-toast"
 
 export interface CartItem extends Product {
     selectedSize: any
@@ -11,7 +11,7 @@ export interface CartItem extends Product {
 
 interface CartContextType {
     items: CartItem[]
-    addToCart: (product: Product, size?: number) => void
+    addToCart: (product: Product, size?: number, silent?: boolean) => void
     removeFromCart: (productId: number) => void
     updateQuantity: (productId: number, quantity: number) => void
     clearCart: () => void
@@ -26,7 +26,6 @@ const CART_STORAGE_KEY = "shoes-store-cart"
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([])
     const [isInitialized, setIsInitialized] = useState(false)
-    const { showToast } = useToast()
 
     // Load cart from localStorage on mount
     useEffect(() => {
@@ -52,7 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
     }, [items, isInitialized])
 
-    const addToCart = (product: Product, size?: number) => {
+    const addToCart = (product: Product, size?: number, silent: boolean = false) => {
         setItems((currentItems) => {
             const existingItem = currentItems.find((item) =>
                 item.id === product.id && item.selectedSize === (size || item.selectedSize)
@@ -60,7 +59,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
             if (existingItem) {
                 // Increase quantity if item already exists
-                showToast(`${product.name} quantity updated`, 'success')
+                if (!silent) {
+                    setTimeout(() => {
+                        toast({
+                            title: "Cart Updated",
+                            description: `${product.name} quantity updated`,
+                        })
+                    }, 0)
+                }
                 return currentItems.map((item) =>
                     item.id === product.id && item.selectedSize === (size || item.selectedSize)
                         ? { ...item, quantity: item.quantity + 1 }
@@ -68,7 +74,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 )
             } else {
                 // Add new item with quantity 1
-                showToast(`${product.name} added to cart`, 'success')
+                if (!silent) {
+                    setTimeout(() => {
+                        toast({
+                            title: "Added to Cart",
+                            description: `${product.name} added to cart`,
+                        })
+                    }, 0)
+                }
                 return [...currentItems, {
                     ...product,
                     quantity: 1,
@@ -79,11 +92,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
 
     const removeFromCart = (productId: number) => {
-        const item = items.find((item) => item.id === productId)
-        if (item) {
-            showToast(`${item.name} removed from cart`, 'info')
-        }
-        setItems((currentItems) => currentItems.filter((item) => item.id !== productId))
+        setItems((currentItems) => {
+            const item = currentItems.find((item) => item.id === productId)
+            if (item) {
+                // Schedule toast to run after render
+                setTimeout(() => {
+                    toast({
+                        title: "Removed from Cart",
+                        description: `${item.name} removed from cart`,
+                    })
+                }, 0)
+            }
+            return currentItems.filter((item) => item.id !== productId)
+        })
     }
 
     const updateQuantity = (productId: number, quantity: number) => {
@@ -100,10 +121,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
 
     const clearCart = () => {
-        if (items.length > 0) {
-            showToast('Cart cleared', 'warning')
-        }
-        setItems([])
+        setItems((currentItems) => {
+            if (currentItems.length > 0) {
+                // Schedule toast to run after render
+                setTimeout(() => {
+                    toast({
+                        title: "Cart Cleared",
+                        description: "All items removed from cart",
+                    })
+                }, 0)
+            }
+            return []
+        })
     }
 
     const totalItems = items.reduce((total, item) => total + item.quantity, 0)

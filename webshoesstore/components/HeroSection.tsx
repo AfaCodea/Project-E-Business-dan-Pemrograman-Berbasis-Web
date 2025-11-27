@@ -99,7 +99,7 @@ export default function HeroSection() {
             <Button
               size="icon"
               onClick={handleSearch}
-              className="absolute right-1 sm:right-2 top-1 sm:top-2 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-primary hover:bg-primary/90 shadow-lg"
+              className="absolute right-1 sm:right-2 top-1 sm:top-2 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-orange hover:bg-orange/90 shadow-lg"
             >
               <Search className="h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
@@ -117,6 +117,9 @@ export default function HeroSection() {
             className="object-cover"
             priority
           />
+
+          {/* Gradient Overlay for smooth transition to next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent z-10" />
 
           {/* Hotspot Indicators - White circles with glow */}
           <div className="absolute top-[25%] left-[20%] w-12 h-12 rounded-full border-2 border-white/90 bg-white/20 backdrop-blur-md flex items-center justify-center cursor-pointer hover:bg-white/30 hover:scale-110 transition-all shadow-lg ring-2 ring-white/30">

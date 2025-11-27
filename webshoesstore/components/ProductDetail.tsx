@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Product } from '@/lib/products';
 import { useCart } from '@/lib/cart-context';
-import { useToast } from '@/lib/toast-context';
+import { toast } from '@/hooks/use-toast';
 import ImageGallery from './ImageGallery';
 import SizeSelector from './SizeSelector';
 import QuantitySelector from './QuantitySelector';
@@ -13,22 +13,34 @@ interface ProductDetailProps {
     product: Product;
 }
 
+
 const ProductDetail = ({ product }: ProductDetailProps) => {
     const [selectedSize, setSelectedSize] = useState<number | null>(null);
     const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
-    const { showToast } = useToast();
 
     const handleAddToCart = () => {
         if (!selectedSize && product.sizes && product.sizes.length > 0) {
-            showToast('Please select a size', 'warning');
+            toast({
+                title: "Size Required",
+                description: "Please select a size",
+            });
             return;
         }
 
-        // Add to cart multiple times based on quantity
+        // Add to cart multiple times based on quantity (silently)
         for (let i = 0; i < quantity; i++) {
-            addToCart(product, selectedSize || undefined);
+            addToCart(product, selectedSize || undefined, true);
         }
+
+        // Show single toast after all items added
+        const message = quantity > 1
+            ? `${quantity} × ${product.name} added to cart`
+            : `${product.name} added to cart`;
+        toast({
+            title: "Added to Cart",
+            description: message,
+        });
     };
 
     const images = product.images || [product.image];
