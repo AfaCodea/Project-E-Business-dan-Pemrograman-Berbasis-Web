@@ -7,12 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import { useCart } from "@/lib/cart-context"
-import { allProducts } from "@/lib/products"
+import { allProducts, Product } from "@/lib/products"
 
-const categories = ["", "Men", "Women", ""]
+const categories = ["Men", "Women"]
 
-// Get first 4 products for homepage display
-const products = allProducts.slice(0, 4)
+
 
 import { FadeIn, StaggerContainer, fadeInItem } from "@/components/ui/motion"
 import { motion } from "framer-motion"
@@ -20,10 +19,19 @@ import { motion } from "framer-motion"
 // ... imports ...
 
 export default function BestSellingProducts() {
-  const [activeCategory, setActiveCategory] = useState("All")
+  const [activeCategory, setActiveCategory] = useState("Men")
   const { addToCart } = useCart()
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  console.log("Active Category:", activeCategory)
+  console.log("All Products:", allProducts.length)
+
+  const products = allProducts
+    .filter((product) => product.category === activeCategory)
+    .slice(0, 4)
+
+  console.log("Filtered Products:", products.length)
+
+  const handleAddToCart = (product: Product) => {
     addToCart(product)
   }
 
@@ -58,12 +66,9 @@ export default function BestSellingProducts() {
         </FadeIn>
 
         <div className="relative">
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" staggerChildren={0.1}>
-            {(activeCategory === "All"
-              ? products
-              : products.filter(p => p.category === activeCategory)
-            ).map((product) => (
-              <motion.div key={product.id} variants={fadeInItem}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <div key={product.id}>
                 <Card className="group overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                   <Link href={`/product/${product.id}`}>
                     <div className="relative h-64 w-full cursor-pointer">
@@ -97,9 +102,9 @@ export default function BestSellingProducts() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
 
         <FadeIn direction="up" delay={0.4}>
