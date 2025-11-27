@@ -1,5 +1,6 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
+import { motion, useScroll, useTransform, easeOut } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
@@ -9,11 +10,53 @@ import Image from "next/image"
 // Main hero image - premium shoes display
 const heroImage = "/images/hero-section.jpg"
 
+const Hotspot = ({ className, delay, label, isActive, onHover }: { className: string, delay: number, label: string, isActive: boolean, onHover: (isHovering: boolean) => void }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay, duration: 0.5 }}
+    className={`absolute ${className} group z-20`}
+    onMouseEnter={() => onHover(true)}
+    onMouseLeave={() => onHover(false)}
+  >
+    <div className="relative flex items-center justify-center w-12 h-12 cursor-pointer">
+      {/* Pulsing Ring */}
+      <motion.div
+        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-0 rounded-full bg-white/30"
+      />
+
+      {/* Main Circle */}
+      <div className={`relative w-12 h-12 rounded-full border-2 border-white/90 backdrop-blur-md flex items-center justify-center transition-all shadow-lg ring-2 ring-white/30 ${isActive ? 'bg-white/30 scale-110' : 'bg-white/20 hover:bg-white/30 hover:scale-110'}`}>
+        <div className="w-3 h-3 rounded-full bg-white shadow-sm"></div>
+      </div>
+
+      {/* Tooltip */}
+      <div className={`absolute left-full ml-4 px-4 py-2 bg-white/90 backdrop-blur-md rounded-lg shadow-xl transition-all duration-300 pointer-events-none whitespace-nowrap ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`}>
+        <p className="text-sm font-semibold text-gray-900">{label}</p>
+        <div className="absolute left-0 top-1/2 -translate-x-1 -translate-y-1/2 w-2 h-2 bg-white/90 rotate-45"></div>
+      </div>
+    </div>
+  </motion.div>
+)
+
 export default function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("")
   const [displayText, setDisplayText] = useState("")
   const fullText = "Step Into Style & Comfort"
   const router = useRouter()
+  const containerRef = useRef(null)
+  const [activeHotspot, setActiveHotspot] = useState(0)
+  const [isHoveringHotspot, setIsHoveringHotspot] = useState(false)
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"], { ease: easeOut })
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1], { ease: easeOut })
 
   useEffect(() => {
     let currentIndex = 0
@@ -53,6 +96,17 @@ export default function HeroSection() {
     return () => clearTimeout(timeoutId)
   }, [])
 
+  // Auto-cycle hotspots
+  useEffect(() => {
+    if (isHoveringHotspot) return
+
+    const interval = setInterval(() => {
+      setActiveHotspot((prev) => (prev + 1) % 5) // 5 is total hotspots
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [isHoveringHotspot])
+
   const handleSearch = () => {
     if (searchQuery.trim()) {
       router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`)
@@ -66,7 +120,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative min-h-screen flex flex-col lg:flex-row">
+    <section ref={containerRef} className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden">
       {/* Left Side - Dark Paneled Wall with Content */}
       <div className="relative w-full lg:w-1/2 bg-gray-900 flex items-center justify-center pt-24 lg:pt-0">
         {/* Paneled Wall Pattern */}
@@ -108,8 +162,20 @@ export default function HeroSection() {
       </div>
 
       {/* Right Side - Shoes Display Image */}
-      <div className="relative w-full lg:w-1/2 bg-white order-first lg:order-last">
-        <div className="relative h-full min-h-[400px] sm:min-h-[500px] lg:min-h-screen">
+      <div className="relative w-full lg:w-1/2 bg-white order-first lg:order-last overflow-hidden">
+        <motion.div
+          className="relative h-full min-h-[400px] sm:min-h-[500px] lg:min-h-screen"
+          initial={{ clipPath: "inset(10% 10% 10% 10%)", scale: 1.2 }}
+          animate={{ clipPath: "inset(0% 0% 0% 0%)", scale: 1 }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            y,
+            scale,
+            willChange: "transform",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden"
+          }}
+        >
           <Image
             src={heroImage}
             alt="Premium shoes collection"
@@ -122,13 +188,42 @@ export default function HeroSection() {
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent z-10" />
 
           {/* Hotspot Indicators - White circles with glow */}
-          <div className="absolute top-[25%] left-[20%] w-12 h-12 rounded-full border-2 border-white/90 bg-white/20 backdrop-blur-md flex items-center justify-center cursor-pointer hover:bg-white/30 hover:scale-110 transition-all shadow-lg ring-2 ring-white/30">
-            <div className="w-3 h-3 rounded-full bg-white"></div>
-          </div>
-          <div className="absolute bottom-[30%] right-[25%] w-12 h-12 rounded-full border-2 border-white/90 bg-white/20 backdrop-blur-md flex items-center justify-center cursor-pointer hover:bg-white/30 hover:scale-110 transition-all shadow-lg ring-2 ring-white/30">
-            <div className="w-3 h-3 rounded-full bg-white"></div>
-          </div>
-        </div>
+          <Hotspot
+            className="top-[25%] left-[20%]"
+            delay={1}
+            label="Premium Leather"
+            isActive={activeHotspot === 0}
+            onHover={setIsHoveringHotspot}
+          />
+          <Hotspot
+            className="bottom-[30%] right-[25%]"
+            delay={1.2}
+            label="Air Cushion Sole"
+            isActive={activeHotspot === 1}
+            onHover={setIsHoveringHotspot}
+          />
+          <Hotspot
+            className="top-[45%] right-[35%]"
+            delay={1.4}
+            label="Breathable Lining"
+            isActive={activeHotspot === 2}
+            onHover={setIsHoveringHotspot}
+          />
+          <Hotspot
+            className="bottom-[25%] left-[40%]"
+            delay={1.6}
+            label="Anti-slip Grip"
+            isActive={activeHotspot === 3}
+            onHover={setIsHoveringHotspot}
+          />
+          <Hotspot
+            className="top-[60%] left-[55%]"
+            delay={1.8}
+            label="Memory Foam Insole"
+            isActive={activeHotspot === 4}
+            onHover={setIsHoveringHotspot}
+          />
+        </motion.div>
       </div>
     </section>
   )

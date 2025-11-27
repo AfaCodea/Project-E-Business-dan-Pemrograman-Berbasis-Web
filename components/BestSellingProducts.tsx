@@ -16,6 +16,7 @@ const categories = ["Men", "Women"]
 
 import { FadeIn, StaggerContainer, fadeInItem } from "@/components/ui/motion"
 import { motion } from "framer-motion"
+import ParticlesBackground from "@/components/ui/ParticlesBackground"
 
 // ... imports ...
 
@@ -41,8 +42,9 @@ export default function BestSellingProducts() {
   }
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gray-50 relative overflow-hidden">
+      <ParticlesBackground />
+      <div className="container mx-auto px-4 relative z-10">
         <FadeIn direction="up" delay={0.1}>
           <p className="text-orange text-sm font-semibold text-center tracking-wider uppercase mb-3">
             CATEGORIES

@@ -46,8 +46,46 @@ export default function ClientReviews() {
   }
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-white relative overflow-hidden">
+      {/* Animated Neon Orange Spotlight */}
+      <motion.div
+        className="absolute inset-0 opacity-20"
+        animate={{
+          background: [
+            'radial-gradient(circle at 0% 50%, rgba(251, 146, 60, 0.4) 0%, transparent 50%)',
+            'radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.4) 0%, transparent 50%)',
+            'radial-gradient(circle at 100% 50%, rgba(251, 146, 60, 0.4) 0%, transparent 50%)',
+            'radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.4) 0%, transparent 50%)',
+            'radial-gradient(circle at 0% 50%, rgba(251, 146, 60, 0.4) 0%, transparent 50%)',
+          ],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+
+      {/* Secondary moving glow */}
+      <motion.div
+        className="absolute inset-0 opacity-15"
+        animate={{
+          background: [
+            'radial-gradient(circle at 100% 0%, rgba(249, 115, 22, 0.5) 0%, transparent 40%)',
+            'radial-gradient(circle at 0% 100%, rgba(249, 115, 22, 0.5) 0%, transparent 40%)',
+            'radial-gradient(circle at 100% 100%, rgba(249, 115, 22, 0.5) 0%, transparent 40%)',
+            'radial-gradient(circle at 0% 0%, rgba(249, 115, 22, 0.5) 0%, transparent 40%)',
+            'radial-gradient(circle at 100% 0%, rgba(249, 115, 22, 0.5) 0%, transparent 40%)',
+          ],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
         <FadeIn direction="left" delay={0.2} className="text-right mb-12">
           <div className="inline-block mb-4">
             <span className="text-sm font-semibold text-orange uppercase tracking-wider">
