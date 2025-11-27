@@ -10,12 +10,17 @@ const materialImages = [
   "/images/na3.png",
 ]
 
+import { FadeIn, StaggerContainer, fadeInItem } from "@/components/ui/motion"
+import { motion } from "framer-motion"
+
+// ... imports ...
+
 export default function Materials() {
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
+          <FadeIn direction="right" delay={0.2} className="space-y-6">
             <div className="inline-block">
               <span className="text-sm font-semibold text-orange uppercase tracking-wider">
                 MATERIALS
@@ -30,20 +35,20 @@ export default function Materials() {
             <Button variant="link" className="p-0 text-orange hover:text-orange/80">
               More Info <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
+          </FadeIn>
 
-          <div className="grid grid-cols-1 gap-4">
+          <StaggerContainer className="grid grid-cols-1 gap-4" staggerChildren={0.2}>
             {materialImages.map((image, index) => (
-              <div key={index} className="relative h-64 rounded-lg overflow-hidden">
+              <motion.div key={index} variants={fadeInItem} className="relative h-64 rounded-lg overflow-hidden">
                 <Image
                   src={image}
                   alt={`Shoes collection ${index + 1}`}
                   fill
-                  className="object-cover rounded-lg"
+                  className="object-cover rounded-lg hover:scale-105 transition-transform duration-500"
                 />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </div>
     </section>

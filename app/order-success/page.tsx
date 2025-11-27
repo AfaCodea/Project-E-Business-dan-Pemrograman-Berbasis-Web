@@ -9,7 +9,7 @@ import Footer from "@/components/Footer"
 export default function OrderSuccessPage() {
     return (
         <main className="min-h-screen bg-gray-50">
-            <Header />
+            <Header variant="dark" />
 
             <div className="container mx-auto px-4 pt-32 pb-20">
                 <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 text-center animate-in fade-in zoom-in duration-500">

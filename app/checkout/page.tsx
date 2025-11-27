@@ -10,12 +10,11 @@ import OrderSummary from "@/components/OrderSummary"
 import QRISModal from "@/components/QRISModal"
 import { Button } from "@/components/ui/button"
 import { CreditCard, QrCode, Truck } from "lucide-react"
-import { useToast } from "@/lib/toast-context"
+import { toast } from "@/hooks/use-toast"
 
 export default function CheckoutPage() {
     const router = useRouter()
     const { items, subtotal, clearCart } = useCart()
-    const { showToast } = useToast()
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -48,7 +47,10 @@ export default function CheckoutPage() {
         const emptyFields = requiredFields.filter((field) => !formData[field as keyof typeof formData])
 
         if (emptyFields.length > 0) {
-            showToast("Please fill in all required fields", "error")
+            toast({
+                title: "Form Incomplete",
+                description: "Please fill in all required fields",
+            })
             return false
         }
         return true
@@ -74,7 +76,10 @@ export default function CheckoutPage() {
     const handlePaymentSuccess = () => {
         setIsQRISModalOpen(false)
         clearCart()
-        showToast("Payment successful! Order placed.", "success")
+        toast({
+            title: "Payment Successful",
+            description: "Order placed successfully!",
+        })
         router.push("/order-success")
     }
 

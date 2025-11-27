@@ -5,7 +5,8 @@ import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
-
+import { FadeIn, StaggerContainer, fadeInItem } from "@/components/ui/motion"
+import { motion } from "framer-motion"
 const reviews = [
   {
     id: 1,
@@ -47,7 +48,7 @@ export default function ClientReviews() {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-right mb-12">
+        <FadeIn direction="left" delay={0.2} className="text-right mb-12">
           <div className="inline-block mb-4">
             <span className="text-sm font-semibold text-orange uppercase tracking-wider">
               TESTIMONIALS
@@ -56,50 +57,49 @@ export default function ClientReviews() {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
             Our Client Reviews
           </h2>
-        </div>
+        </FadeIn>
 
         <div className="relative max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-6">
+          <StaggerContainer className="grid md:grid-cols-3 gap-6" staggerChildren={0.2}>
             {reviews.map((review) => (
-              <Card
-                key={review.id}
-                className="overflow-hidden"
-              >
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={review.background}
-                    alt={review.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-6 relative">
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2">
-                    <div className="relative h-16 w-16 rounded-full overflow-hidden border-4 border-white">
-                      <Image
-                        src={review.image}
-                        alt={review.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+              <motion.div key={review.id} variants={fadeInItem}>
+                <Card className="overflow-hidden h-full">
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={review.background}
+                      alt={review.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  <div className="pt-8 text-center">
-                    <h3 className="font-semibold text-lg mb-2">{review.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{review.text}</p>
-                    <div className="flex items-center justify-center gap-1">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                  <CardContent className="p-6 relative">
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2">
+                      <div className="relative h-16 w-16 rounded-full overflow-hidden border-4 border-white">
+                        <Image
+                          src={review.image}
+                          alt={review.name}
+                          fill
+                          className="object-cover"
                         />
-                      ))}
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="pt-8 text-center">
+                      <h3 className="font-semibold text-lg mb-2">{review.name}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{review.text}</p>
+                      <div className="flex items-center justify-center gap-1">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </StaggerContainer>
 
           <div className="flex justify-center gap-4 mt-8">
             <Button
