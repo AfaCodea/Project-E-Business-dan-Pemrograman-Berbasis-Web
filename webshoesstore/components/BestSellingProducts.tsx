@@ -54,14 +54,14 @@ export default function BestSellingProducts() {
               ? products
               : products.filter(p => p.category === activeCategory)
             ).map((product) => (
-              <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <Card key={product.id} className="group overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                 <Link href={`/product/${product.id}`}>
                   <div className="relative h-64 w-full cursor-pointer">
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 </Link>
