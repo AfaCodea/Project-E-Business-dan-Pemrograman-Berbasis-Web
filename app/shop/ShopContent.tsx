@@ -47,7 +47,7 @@ export default function ShopContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <Header />
 
       {/* Hero Section */}
@@ -116,14 +116,14 @@ export default function ShopContent() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
-                <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <Card key={product.id} className="group overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                   <Link href={`/product/${product.id}`}>
                     <div className="relative h-64 w-full cursor-pointer">
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   </Link>
