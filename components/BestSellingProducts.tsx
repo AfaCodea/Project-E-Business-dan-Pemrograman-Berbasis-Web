@@ -9,7 +9,7 @@ import Image from "next/image"
 import { useCart } from "@/lib/cart-context"
 import { allProducts } from "@/lib/products"
 
-const categories = ["All", "Men", "Women", "Sports"]
+const categories = ["", "Men", "Women", ""]
 
 // Get first 4 products for homepage display
 const products = allProducts.slice(0, 4)
