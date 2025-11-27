@@ -247,7 +247,7 @@
 /* Product Detail Page */
 .product-page {
   min-height: calc(100vh - 80px);
-  padding: 40px 0;
+  padding: 140px 0 40px;
 }
 
 .product-detail-container {

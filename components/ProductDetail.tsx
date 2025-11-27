@@ -48,7 +48,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
     const specs = product.specifications;
 
     return (
-        <div className="product-detail-container animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="product-detail-container">
             {/* Breadcrumb */}
             <nav className="breadcrumb">
                 <Link href="/">Home</Link>

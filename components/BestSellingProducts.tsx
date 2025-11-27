@@ -2,11 +2,12 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Plus, Star, ArrowRight } from "lucide-react"
+import { Plus, Star, ArrowRight, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import { useCart } from "@/lib/cart-context"
+import { useWishlist } from "@/lib/wishlist-context"
 import { allProducts, Product } from "@/lib/products"
 
 const categories = ["Men", "Women"]
@@ -21,18 +22,22 @@ import { motion } from "framer-motion"
 export default function BestSellingProducts() {
   const [activeCategory, setActiveCategory] = useState("Men")
   const { addToCart } = useCart()
-
-  console.log("Active Category:", activeCategory)
-  console.log("All Products:", allProducts.length)
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
 
   const products = allProducts
     .filter((product) => product.category === activeCategory)
     .slice(0, 4)
 
-  console.log("Filtered Products:", products.length)
-
   const handleAddToCart = (product: Product) => {
     addToCart(product)
+  }
+
+  const toggleWishlist = (product: Product) => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id)
+    } else {
+      addToWishlist(product)
+    }
   }
 
   return (
@@ -80,6 +85,17 @@ export default function BestSellingProducts() {
                       />
                     </div>
                   </Link>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-2 right-2 bg-white/80 hover:bg-white rounded-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleWishlist(product)
+                    }}
+                  >
+                    <Heart className={`h-5 w-5 ${isInWishlist(product.id) ? "fill-red-500 text-red-500" : "text-gray-600"}`} />
+                  </Button>
                   <CardContent className="p-4">
                     <p className="text-sm text-gray-500 mb-1">{product.category}</p>
                     <Link href={`/product/${product.id}`}>

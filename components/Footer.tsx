@@ -32,24 +32,40 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="font-semibold text-lg">Follow Us</h4>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-primary transition-colors">
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                <Twitter className="h-6 w-6" />
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                <Instagram className="h-6 w-6" />
-              </a>
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h4 className="font-semibold text-lg">Follow Us</h4>
+              <div className="flex gap-4">
+                <a href="#" className="hover:text-primary transition-colors">
+                  <Facebook className="h-6 w-6" />
+                </a>
+                <a href="#" className="hover:text-primary transition-colors">
+                  <Twitter className="h-6 w-6" />
+                </a>
+                <a href="#" className="hover:text-primary transition-colors">
+                  <Instagram className="h-6 w-6" />
+                </a>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold text-lg">Payment Methods</h4>
+              <div className="flex gap-3 items-center">
+                <div className="bg-white p-2 rounded h-10 w-16 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/images/payment/visa.png" alt="Visa" className="h-full w-auto object-contain" />
+                </div>
+                <div className="bg-white p-2 rounded h-10 w-16 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/images/payment/qris.png" alt="QRIS" className="h-full w-auto object-contain" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-          <p>Copyright © {new Date().getFullYear()} Shoes Store X Afa. All rights reserved.</p>
+          <p>Copyright © {new Date().getFullYear()} Company Shoes Store X Afa | By Agil Prasunza.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
