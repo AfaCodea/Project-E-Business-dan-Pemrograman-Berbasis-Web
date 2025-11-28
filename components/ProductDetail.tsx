@@ -8,6 +8,7 @@ import { toast } from '@/hooks/use-toast';
 import ImageGallery from './ImageGallery';
 import SizeSelector from './SizeSelector';
 import QuantitySelector from './QuantitySelector';
+import CheckoutDialog from '@/components/CheckoutDialog';
 
 interface ProductDetailProps {
     product: Product;
@@ -18,6 +19,8 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
     const [selectedSize, setSelectedSize] = useState<number | null>(null);
     const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
+
+    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
     const handleAddToCart = () => {
         if (!selectedSize && product.sizes && product.sizes.length > 0) {
@@ -41,6 +44,23 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
             title: "Added to Cart",
             description: message,
         });
+    };
+
+    const handleBuyNow = () => {
+        if (!selectedSize && product.sizes && product.sizes.length > 0) {
+            toast({
+                title: "Size Required",
+                description: "Please select a size",
+            });
+            return;
+        }
+
+        // Add to cart multiple times based on quantity (silently)
+        for (let i = 0; i < quantity; i++) {
+            addToCart(product, selectedSize || undefined, true);
+        }
+
+        setIsCheckoutOpen(true);
     };
 
     const images = product.images || [product.image];
@@ -114,10 +134,26 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
                         onQuantityChange={setQuantity}
                     />
 
-                    {/* Add to Cart Button */}
-                    <button onClick={handleAddToCart} className="add-to-cart-btn">
-                        Add to Cart
-                    </button>
+                    {/* Action Buttons */}
+                    <div className="flex gap-4 mb-6">
+                        <button
+                            onClick={handleAddToCart}
+                            className="add-to-cart-btn flex-1 bg-white text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-300 mb-0"
+                        >
+                            Add to Cart
+                        </button>
+                        <button
+                            onClick={handleBuyNow}
+                            className="add-to-cart-btn flex-1 bg-orange hover:bg-orange/90 border-none text-white mb-0"
+                        >
+                            Buy Now
+                        </button>
+                    </div>
+
+                    <CheckoutDialog
+                        isOpen={isCheckoutOpen}
+                        onClose={() => setIsCheckoutOpen(false)}
+                    />
 
                     {/* Stock Status */}
                     {product.inStock !== undefined && (

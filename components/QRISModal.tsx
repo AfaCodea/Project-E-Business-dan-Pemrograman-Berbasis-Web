@@ -54,7 +54,7 @@ export default function QRISModal({ isOpen, onClose, totalAmount, onPaymentSucce
     const qrValue = `QRIS-PAYMENT-${totalAmount}-${Date.now()}`
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden animate-in fade-in zoom-in duration-300">
                 {/* Header */}
                 <div className="bg-gray-900 p-4 flex justify-between items-center text-white">
