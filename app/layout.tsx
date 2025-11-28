@@ -4,6 +4,7 @@ import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
 import { WishlistProvider } from "@/lib/wishlist-context"
 import { Toaster } from "@/components/ui/toaster"
+import InitialLoader from "@/components/InitialLoader"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <InitialLoader />
         <CartProvider>
           <WishlistProvider>
             {children}

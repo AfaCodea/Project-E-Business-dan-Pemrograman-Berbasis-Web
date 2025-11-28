@@ -14,7 +14,7 @@ const Hotspot = ({ className, delay, label, isActive, onHover }: { className: st
   <motion.div
     initial={{ opacity: 0, scale: 0 }}
     animate={{ opacity: 1, scale: 1 }}
-    transition={{ delay, duration: 0.3 }}
+    transition={{ delay, duration: 0.5, type: "spring", stiffness: 260, damping: 20 }}
     className={`absolute ${className} group z-20 hidden sm:flex`}
     onMouseEnter={() => onHover(true)}
     onMouseLeave={() => onHover(false)}
@@ -49,14 +49,13 @@ export default function HeroSection() {
   const containerRef = useRef(null)
   const [activeHotspot, setActiveHotspot] = useState(0)
   const [isHoveringHotspot, setIsHoveringHotspot] = useState(false)
-  const [animationComplete, setAnimationComplete] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   })
 
-  // Only apply parallax after initial animation completes
+  // Parallax effects
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"], { ease: easeOut })
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1], { ease: easeOut })
 
@@ -165,76 +164,86 @@ export default function HeroSection() {
       </div>
 
       {/* Right Side - Shoes Display Image */}
-      <div className="relative w-full lg:w-1/2 bg-white order-first lg:order-last overflow-hidden min-h-[50vh] sm:min-h-[60vh] lg:min-h-screen">
+      <div
+        className="relative w-full lg:w-1/2 order-first lg:order-last overflow-hidden min-h-[50vh] sm:min-h-[60vh] lg:min-h-screen"
+        style={{
+          backgroundImage: `url(${heroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: '#f5f5f5'
+        }}
+      >
+        {/* Initial Entrance Animation Wrapper */}
         <motion.div
           className="relative h-full w-full"
-          initial={{ clipPath: "inset(4% 4% 4% 4%)" }}
-          animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-          transition={{
-            duration: 0.5,
-            ease: [0.25, 0.1, 0.25, 1]
-          }}
-          onAnimationComplete={() => setAnimationComplete(true)}
-          style={{
-            y: animationComplete ? y : 0,
-            scale: animationComplete ? scale : 1,
-            willChange: "transform",
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "translateZ(0)"
-          }}
+          initial={{ scale: 1.15 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <Image
-            src={heroImage}
-            alt="Premium shoes collection - Premium quality footwear at Shoes Store X Afa"
-            fill
-            className="object-cover object-center"
-            priority
-            quality={85}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
-          />
+          {/* Parallax Wrapper */}
+          <motion.div
+            className="relative h-full w-full"
+            style={{
+              y,
+              scale,
+              willChange: "transform"
+            }}
+          >
+            <Image
+              src={heroImage}
+              alt="Premium shoes collection - Premium quality footwear at Shoes Store X Afa"
+              fill
+              className="object-cover object-center"
+              priority
+              loading="eager"
+              quality={95}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
+            />
 
-          {/* Gradient Overlay for smooth transition to next section */}
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent z-10" />
+            {/* Gradient Overlay for smooth transition to next section */}
+            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white to-transparent z-10" />
 
-          {/* Hotspot Indicators - White circles with glow */}
-          <Hotspot
-            className="top-[25%] left-[20%]"
-            delay={0.3}
-            label="Premium Leather"
-            isActive={activeHotspot === 0}
-            onHover={setIsHoveringHotspot}
-          />
-          <Hotspot
-            className="bottom-[30%] right-[25%]"
-            delay={0.4}
-            label="Air Cushion Sole"
-            isActive={activeHotspot === 1}
-            onHover={setIsHoveringHotspot}
-          />
-          <Hotspot
-            className="top-[45%] right-[35%]"
-            delay={0.5}
-            label="Breathable Lining"
-            isActive={activeHotspot === 2}
-            onHover={setIsHoveringHotspot}
-          />
-          <Hotspot
-            className="bottom-[25%] left-[40%]"
-            delay={0.6}
-            label="Anti-slip Grip"
-            isActive={activeHotspot === 3}
-            onHover={setIsHoveringHotspot}
-          />
-          <Hotspot
-            className="top-[60%] left-[55%]"
-            delay={0.7}
-            label="Memory Foam Insole"
-            isActive={activeHotspot === 4}
-            onHover={setIsHoveringHotspot}
-          />
+            {/* Hotspot Indicators - White circles with glow */}
+            <Hotspot
+              className="top-[25%] left-[20%]"
+              delay={0.5}
+              label="Premium Leather"
+              isActive={activeHotspot === 0}
+              onHover={setIsHoveringHotspot}
+            />
+            <Hotspot
+              className="bottom-[30%] right-[25%]"
+              delay={0.6}
+              label="Air Cushion Sole"
+              isActive={activeHotspot === 1}
+              onHover={setIsHoveringHotspot}
+            />
+            <Hotspot
+              className="top-[45%] right-[35%]"
+              delay={0.7}
+              label="Breathable Lining"
+              isActive={activeHotspot === 2}
+              onHover={setIsHoveringHotspot}
+            />
+            <Hotspot
+              className="bottom-[25%] left-[40%]"
+              delay={0.8}
+              label="Anti-slip Grip"
+              isActive={activeHotspot === 3}
+              onHover={setIsHoveringHotspot}
+            />
+            <Hotspot
+              className="top-[60%] left-[55%]"
+              delay={0.9}
+              label="Memory Foam Insole"
+              isActive={activeHotspot === 4}
+              onHover={setIsHoveringHotspot}
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>
