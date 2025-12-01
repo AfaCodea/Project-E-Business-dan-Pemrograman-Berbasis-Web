@@ -112,16 +112,16 @@ export default function CheckoutDialog({ isOpen, onClose }: CheckoutDialogProps)
     return (
         <>
             <Dialog open={isOpen} onOpenChange={onClose}>
-                <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
+                <DialogContent className="max-w-[95vw] sm:max-w-5xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold">Checkout</DialogTitle>
+                        <DialogTitle className="text-xl sm:text-2xl font-bold">Checkout</DialogTitle>
                     </DialogHeader>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mt-4">
                         {/* Left Column - Forms */}
-                        <div className="lg:col-span-2 space-y-6">
+                        <div className="lg:col-span-2 space-y-4 sm:space-y-6">
                             {/* Shipping Information */}
-                            <section className="bg-gray-50 p-6 rounded-xl">
+                            <section className="bg-gray-50 p-4 sm:p-6 rounded-xl">
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
                                         <Truck className="h-5 w-5" />

@@ -583,4 +583,49 @@
   .breadcrumb {
     font-size: 12px;
   }
+
+  .product-page {
+    padding: 100px 0 20px;
+  }
+
+  .product-detail-container {
+    padding: 0 16px;
+  }
+
+  /* Make buttons stack on mobile */
+  .add-to-cart-btn {
+    font-size: 14px;
+    height: 48px;
+  }
+}
+
+/* Extra small devices (phones, less than 640px) */
+@media (max-width: 640px) {
+  .product-title {
+    font-size: 20px;
+  }
+
+  .product-price {
+    font-size: 24px;
+  }
+
+  .product-description {
+    font-size: 14px;
+  }
+
+  .size-option {
+    min-width: 50px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .quantity-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .add-to-cart-btn {
+    height: 44px;
+    font-size: 14px;
+  }
 }

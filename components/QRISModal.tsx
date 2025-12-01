@@ -57,34 +57,34 @@ export default function QRISModal({ isOpen, onClose, totalAmount, onPaymentSucce
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden animate-in fade-in zoom-in duration-300">
                 {/* Header */}
-                <div className="bg-gray-900 p-4 flex justify-between items-center text-white">
+                <div className="bg-gray-900 p-3 sm:p-4 flex justify-between items-center text-white">
                     <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-lg">Scan QRIS to Pay</h3>
+                        <h3 className="font-bold text-base sm:text-lg">Scan QRIS to Pay</h3>
                     </div>
                     <button onClick={onClose} className="hover:bg-white/20 p-1 rounded-full transition-colors">
-                        <X className="h-5 w-5" />
+                        <X className="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
                 </div>
 
                 {/* Content */}
-                <div className="p-6 flex flex-col items-center">
-                    <div className="mb-6 text-center">
-                        <p className="text-sm text-gray-500 mb-1">Total Amount</p>
-                        <p className="text-3xl font-bold text-primary">{formatPrice(totalAmount)}</p>
+                <div className="p-4 sm:p-6 flex flex-col items-center">
+                    <div className="mb-4 sm:mb-6 text-center">
+                        <p className="text-xs sm:text-sm text-gray-500 mb-1">Total Amount</p>
+                        <p className="text-2xl sm:text-3xl font-bold text-primary">{formatPrice(totalAmount)}</p>
                     </div>
 
-                    <div className="bg-white p-4 rounded-xl border-2 border-gray-100 shadow-sm mb-6 relative group">
+                    <div className="bg-white p-3 sm:p-4 rounded-xl border-2 border-gray-100 shadow-sm mb-4 sm:mb-6 relative group w-full max-w-[240px]">
                         <QRCodeSVG
                             value={qrValue}
                             size={200}
                             level="H"
                             includeMargin={true}
-                            className="w-full h-full"
+                            className="w-full h-auto"
                         />
                         {/* Logo Overlay */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="bg-white p-1 rounded-full shadow-md">
-                                <div className="w-8 h-8 bg-orange rounded-full flex items-center justify-center text-white font-bold text-xs">
+                                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange rounded-full flex items-center justify-center text-white font-bold text-[10px] sm:text-xs">
                                     QRIS
                                 </div>
                             </div>

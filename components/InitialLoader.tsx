@@ -62,9 +62,9 @@ export default function InitialLoader() {
                             transition={{ delay: 0.6 }}
                             className="mt-4 text-sm text-gray-500 font-medium tracking-wider uppercase"
                         >
-                            Loading Sabar Yuk ...
+                            Loading ...
                         </motion.p>
-                    </div>
+                    </div>s
                 </motion.div>
             )}
         </AnimatePresence>

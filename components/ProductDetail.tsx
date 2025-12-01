@@ -135,16 +135,16 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
                     />
 
                     {/* Action Buttons */}
-                    <div className="flex gap-4 mb-6">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6">
                         <button
                             onClick={handleAddToCart}
-                            className="add-to-cart-btn flex-1 bg-white text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-300 mb-0"
+                            className="add-to-cart-btn flex-1 bg-white text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-300 mb-0 text-sm sm:text-base"
                         >
                             Add to Cart
                         </button>
                         <button
                             onClick={handleBuyNow}
-                            className="add-to-cart-btn flex-1 bg-orange hover:bg-orange/90 border-none text-white mb-0"
+                            className="add-to-cart-btn flex-1 bg-orange hover:bg-orange/90 border-none text-white mb-0 text-sm sm:text-base"
                         >
                             Buy Now
                         </button>
