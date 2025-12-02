@@ -7,7 +7,8 @@ import { formatPrice } from "@/lib/utils"
 export default function OrderSummary() {
     const { items, subtotal } = useCart()
     const shipping = subtotal > 100 ? 0 : 10
-    const total = subtotal + shipping
+    const tax = subtotal * 0.10 // 10% tax
+    const total = subtotal + shipping + tax
 
     return (
         <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
@@ -48,6 +49,10 @@ export default function OrderSummary() {
                     <span className="font-medium text-gray-900">
                         {shipping === 0 ? "Free" : formatPrice(shipping)}
                     </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Tax (10%)</span>
+                    <span className="font-medium text-gray-900">{formatPrice(tax)}</span>
                 </div>
             </div>
 

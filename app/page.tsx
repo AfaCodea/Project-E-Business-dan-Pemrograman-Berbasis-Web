@@ -1,5 +1,6 @@
 import Header from "@/components/Header"
 import HeroSection from "@/components/HeroSection"
+import NewProducts from "@/components/NewProducts"
 import WhyChoosingUs from "@/components/WhyChoosingUs"
 import BestSellingProducts from "@/components/BestSellingProducts"
 import Experiences from "@/components/Experiences"
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <HeroSection />
+      <NewProducts />
       <WhyChoosingUs />
       <BestSellingProducts />
       <Experiences />

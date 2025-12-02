@@ -107,7 +107,8 @@ export default function CheckoutDialog({ isOpen, onClose }: CheckoutDialogProps)
     }
 
     const shipping = subtotal > 100 ? 0 : 10
-    const total = subtotal + shipping
+    const tax = subtotal * 0.10 // 10% tax
+    const total = subtotal + shipping + tax
 
     return (
         <>

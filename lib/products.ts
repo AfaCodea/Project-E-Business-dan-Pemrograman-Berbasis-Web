@@ -17,6 +17,7 @@ export interface Product {
     }
     inStock?: boolean
     detailedDescription?: string
+    isNew?: boolean
 }
 
 
@@ -40,7 +41,8 @@ export const allProducts: Product[] = [
             style: "Casual Sneakers"
         },
         inStock: true,
-        detailedDescription: "Step into timeless style with our Classic White Sneakers. Crafted from premium leather and canvas, these versatile sneakers feature a clean, minimalist design that pairs perfectly with any casual outfit. The rubber sole with air cushioning provides all-day comfort, while the classic white colorway ensures these shoes will never go out of style."
+        detailedDescription: "Step into timeless style with our Classic White Sneakers. Crafted from premium leather and canvas, these versatile sneakers feature a clean, minimalist design that pairs perfectly with any casual outfit. The rubber sole with air cushioning provides all-day comfort, while the classic white colorway ensures these shoes will never go out of style.",
+        isNew: true
     },
     {
         id: 2,
@@ -80,7 +82,8 @@ export const allProducts: Product[] = [
             style: "Urban Streetwear"
         },
         inStock: true,
-        detailedDescription: "Make a statement with our Urban Street Sneakers. Designed for the modern urbanite, these sneakers combine street-style aesthetics with superior comfort. The breathable mesh upper keeps your feet cool, while the EVA foam cushioning provides exceptional support for all-day wear."
+        detailedDescription: "Make a statement with our Urban Street Sneakers. Designed for the modern urbanite, these sneakers combine street-style aesthetics with superior comfort. The breathable mesh upper keeps your feet cool, while the EVA foam cushioning provides exceptional support for all-day wear.",
+        isNew: true
     },
     {
         id: 6,
@@ -117,7 +120,8 @@ export const allProducts: Product[] = [
         price: 89,
         rating: 5,
         image: "/images/women/women1.png",
-        description: "Trendy and comfortable shoes for everyday style"
+        description: "Trendy and comfortable shoes for everyday style",
+        isNew: true
     },
     {
         id: 7,
@@ -153,7 +157,8 @@ export const allProducts: Product[] = [
         price: 109,
         rating: 5,
         image: "/images/women/women5.png",
-        description: "Premium sandals with designer aesthetics"
+        description: "Premium sandals with designer aesthetics",
+        isNew: true
     },
     // Sports Products
     {
@@ -163,7 +168,8 @@ export const allProducts: Product[] = [
         price: 149,
         rating: 5,
         image: "/images/sports/sports1.png",
-        description: "High-performance running shoes for athletes"
+        description: "High-performance running shoes for athletes",
+        isNew: true
     },
     {
         id: 8,
@@ -181,7 +187,8 @@ export const allProducts: Product[] = [
         price: 139,
         rating: 5,
         image: "/images/sports/sports3.png",
-        description: "Versatile training shoes for all workouts"
+        description: "Versatile training shoes for all workouts",
+        isNew: true
     },
     {
         id: 15,

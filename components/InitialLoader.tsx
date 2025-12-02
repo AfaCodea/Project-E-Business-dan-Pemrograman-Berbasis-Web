@@ -64,7 +64,7 @@ export default function InitialLoader() {
                         >
                             Loading ...
                         </motion.p>
-                    </div>s
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>

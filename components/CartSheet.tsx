@@ -137,7 +137,7 @@ export function CartSheet({ children }: { children: React.ReactNode }) {
                                         <span className="font-bold">${subtotal.toFixed(2)}</span>
                                     </div>
                                     <p className="text-sm text-gray-500">
-                                        Shipping and taxes calculated at checkout
+                                        Shipping and 10% tax calculated at checkout
                                     </p>
                                     <Button
                                         className="w-full"
