@@ -111,7 +111,7 @@ export default function NewProducts() {
                                         ))}
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-2xl font-bold text-gray-900">${product.price}</span>
+                                        <span className="text-2xl font-bold text-gray-900">Rp {product.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                         <Button
                                             size="icon"
                                             className="h-10 w-10 rounded-full bg-orange hover:bg-orange/90 shadow-lg shadow-orange/20"

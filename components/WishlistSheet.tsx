@@ -80,7 +80,7 @@ export function WishlistSheet({ children }: { children: React.ReactNode }) {
                                                         {item.category}
                                                     </p>
                                                     <p className="font-bold text-lg mt-1">
-                                                        ${item.price}
+                                                        Rp {item.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                     </p>
                                                 </div>
                                                 <button

@@ -112,7 +112,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
                     </div>
 
                     {/* Price */}
-                    <div className="product-price">${product.price}</div>
+                    <div className="product-price">Rp {product.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
 
                     {/* Description */}
                     <p className="product-description">

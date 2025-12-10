@@ -122,7 +122,7 @@ export function CartSheet({ children }: { children: React.ReactNode }) {
                                                             </Button>
                                                         </div>
                                                         <p className="font-bold text-lg">
-                                                            ${(item.price * item.quantity).toFixed(2)}
+                                                            Rp {(item.price * item.quantity).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -134,7 +134,7 @@ export function CartSheet({ children }: { children: React.ReactNode }) {
                                 <div className="border-t border-gray-200 pt-6 mt-6 space-y-4">
                                     <div className="flex justify-between text-lg">
                                         <span className="font-semibold">Subtotal</span>
-                                        <span className="font-bold">${subtotal.toFixed(2)}</span>
+                                        <span className="font-bold">Rp {subtotal.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                                     </div>
                                     <p className="text-sm text-gray-500">
                                         Shipping and 10% tax calculated at checkout

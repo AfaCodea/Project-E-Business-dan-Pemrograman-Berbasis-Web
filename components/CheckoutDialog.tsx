@@ -192,7 +192,7 @@ export default function CheckoutDialog({ isOpen, onClose }: CheckoutDialogProps)
                                     className="w-full h-14 text-lg font-semibold shadow-lg shadow-primary/20"
                                     disabled={isProcessing}
                                 >
-                                    {isProcessing ? "Processing..." : `Pay ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(total)}`}
+                                    {isProcessing ? "Processing..." : `Pay Rp ${total.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
                                 </Button>
 
                                 <p className="text-xs text-center text-gray-400">

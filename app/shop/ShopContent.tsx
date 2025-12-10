@@ -138,7 +138,7 @@ export default function ShopContent() {
                       ))}
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold">${product.price}</span>
+                      <span className="text-xl font-bold">Rp {product.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                       <Button
                         className="bg-primary hover:bg-primary/90"
                         onClick={() => handleAddToCart(product)}
