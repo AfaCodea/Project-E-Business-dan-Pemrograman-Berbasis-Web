@@ -14,6 +14,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
+import { formatPrice } from "@/lib/utils"
 
 export function WishlistSheet({ children }: { children: React.ReactNode }) {
     const { items, removeFromWishlist, totalItems } = useWishlist()
@@ -80,7 +81,7 @@ export function WishlistSheet({ children }: { children: React.ReactNode }) {
                                                         {item.category}
                                                     </p>
                                                     <p className="font-bold text-lg mt-1">
-                                                        Rp {item.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                                        {formatPrice(item.price)}
                                                     </p>
                                                 </div>
                                                 <button

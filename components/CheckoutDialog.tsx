@@ -15,6 +15,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
+import { formatPrice } from "@/lib/utils"
 
 interface CheckoutDialogProps {
     isOpen: boolean
@@ -192,7 +193,7 @@ export default function CheckoutDialog({ isOpen, onClose }: CheckoutDialogProps)
                                     className="w-full h-14 text-lg font-semibold shadow-lg shadow-primary/20"
                                     disabled={isProcessing}
                                 >
-                                    {isProcessing ? "Processing..." : `Pay Rp ${total.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                                    {isProcessing ? "Processing..." : `Pay ${formatPrice(total)}`}
                                 </Button>
 
                                 <p className="text-xs text-center text-gray-400">

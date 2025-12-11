@@ -10,6 +10,7 @@ import { useWishlist } from "@/lib/wishlist-context"
 import { allProducts, Product } from "@/lib/products"
 import { FadeIn } from "@/components/ui/motion"
 import ParticlesBackground from "@/components/ui/ParticlesBackground"
+import { formatPrice } from "@/lib/utils"
 
 export default function NewProducts() {
     const { addToCart } = useCart()
@@ -111,7 +112,7 @@ export default function NewProducts() {
                                         ))}
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-2xl font-bold text-gray-900">Rp {product.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                                        <span className="text-2xl font-bold text-gray-900">{formatPrice(product.price)}</span>
                                         <Button
                                             size="icon"
                                             className="h-10 w-10 rounded-full bg-orange hover:bg-orange/90 shadow-lg shadow-orange/20"

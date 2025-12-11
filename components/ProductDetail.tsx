@@ -9,6 +9,7 @@ import ImageGallery from './ImageGallery';
 import SizeSelector from './SizeSelector';
 import QuantitySelector from './QuantitySelector';
 import CheckoutDialog from '@/components/CheckoutDialog';
+import { formatPrice } from '@/lib/utils';
 
 interface ProductDetailProps {
     product: Product;
@@ -112,7 +113,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
                     </div>
 
                     {/* Price */}
-                    <div className="product-price">Rp {product.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                    <div className="product-price">{formatPrice(product.price)}</div>
 
                     {/* Description */}
                     <p className="product-description">

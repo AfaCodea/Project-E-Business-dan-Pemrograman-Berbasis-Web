@@ -17,6 +17,7 @@ const categories = ["Men", "Women"]
 import { FadeIn, StaggerContainer, fadeInItem } from "@/components/ui/motion"
 import { motion } from "framer-motion"
 import ParticlesBackground from "@/components/ui/ParticlesBackground"
+import { formatPrice } from "@/lib/utils"
 
 // ... imports ...
 
@@ -109,7 +110,7 @@ export default function BestSellingProducts() {
                       ))}
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold">Rp {product.price.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                      <span className="text-xl font-bold">{formatPrice(product.price)}</span>
                       <Button
                         size="icon"
                         className="h-10 w-10 rounded-full bg-blue-900 hover:bg-blue-800"
