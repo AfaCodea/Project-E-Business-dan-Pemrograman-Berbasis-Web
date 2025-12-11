@@ -44,6 +44,7 @@ export default function Materials() {
                   src={image}
                   alt={`Shoes collection ${index + 1}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover rounded-lg hover:scale-105 transition-transform duration-500"
                 />
               </motion.div>

@@ -107,6 +107,7 @@ export default function ClientReviews() {
                       src={review.background}
                       alt={review.name}
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
                   </div>
@@ -117,6 +118,7 @@ export default function ClientReviews() {
                           src={review.image}
                           alt={review.name}
                           fill
+                          sizes="64px"
                           className="object-cover"
                         />
                       </div>

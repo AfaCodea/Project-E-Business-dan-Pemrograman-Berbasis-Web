@@ -175,14 +175,14 @@ export default function HeroSection() {
       >
         {/* Initial Entrance Animation Wrapper */}
         <motion.div
-          className="relative h-full w-full"
+          className="absolute inset-0 h-full w-full"
           initial={{ scale: 1.15 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           {/* Parallax Wrapper */}
           <motion.div
-            className="relative h-full w-full"
+            className="absolute inset-0 h-full w-full"
             style={{
               y,
               scale,

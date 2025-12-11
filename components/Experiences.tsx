@@ -16,6 +16,7 @@ export default function Experiences() {
               src="/images/about.png"
               alt="Premium shoes collection"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover rounded-lg"
             />
           </FadeIn>
