@@ -14,6 +14,7 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
+    DialogDescription,
 } from "@/components/ui/dialog"
 import { formatPrice } from "@/lib/utils"
 
@@ -117,6 +118,9 @@ export default function CheckoutDialog({ isOpen, onClose }: CheckoutDialogProps)
                 <DialogContent className="max-w-[95vw] sm:max-w-5xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle className="text-xl sm:text-2xl font-bold">Checkout</DialogTitle>
+                        <DialogDescription>
+                            Complete your purchase by providing your shipping and payment details.
+                        </DialogDescription>
                     </DialogHeader>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mt-4">

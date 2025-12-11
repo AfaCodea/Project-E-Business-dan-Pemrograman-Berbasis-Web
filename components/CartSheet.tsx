@@ -13,6 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
+    SheetDescription,
 } from "@/components/ui/sheet"
 import { formatPrice } from "@/lib/utils"
 
@@ -44,6 +45,9 @@ export function CartSheet({ children }: { children: React.ReactNode }) {
                         <SheetTitle className="text-2xl font-bold">
                             Shopping Cart ({totalItems})
                         </SheetTitle>
+                        <SheetDescription>
+                            Review your selected items and proceed to checkout.
+                        </SheetDescription>
                     </SheetHeader>
 
                     <div className="mt-8 flex flex-col h-full">

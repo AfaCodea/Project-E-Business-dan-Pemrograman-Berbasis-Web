@@ -13,6 +13,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
+    SheetDescription,
 } from "@/components/ui/sheet"
 import { formatPrice } from "@/lib/utils"
 
@@ -36,6 +37,9 @@ export function WishlistSheet({ children }: { children: React.ReactNode }) {
                     <SheetTitle className="text-2xl font-bold">
                         Wishlist ({totalItems})
                     </SheetTitle>
+                    <SheetDescription>
+                        View and manage your saved items.
+                    </SheetDescription>
                 </SheetHeader>
 
                 <div className="mt-8 flex flex-col h-full">
